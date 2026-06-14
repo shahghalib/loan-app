@@ -1,7 +1,7 @@
 {
   "name": "loan-application-api",
-  "version": "1.0.0",
-  "description": "Loan Application Management REST API",
+  "version": "2.0.0",
+  "description": "Loan Application Management REST API - Module 02",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -11,7 +11,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.18.2",
-    "joi": "^17.9.2"
+    "joi": "^17.9.2",
+    "sequelize": "^6.35.0",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

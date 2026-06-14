@@ -1,38 +1,46 @@
-const getAll = (req, res, next) => {
+const loanService = require('../services/loan.service');
+const HTTP_STATUS = require('../enums/http-status.enum');
+
+const getAll = async (req, res, next) => {
   try {
-    res.status(200).json({ success: true, message: 'Get all loans - placeholder' });
+    const loans = await loanService.getAll();
+    res.status(HTTP_STATUS.OK).json({ success: true, data: loans });
   } catch (err) {
     next(err);
   }
 };
 
-const getOne = (req, res, next) => {
+const getOne = async (req, res, next) => {
   try {
-    res.status(200).json({ success: true, message: `Get loan with id ${req.params.id} - placeholder` });
+    const loan = await loanService.getOne(req.params.id);
+    res.status(HTTP_STATUS.OK).json({ success: true, data: loan });
   } catch (err) {
     next(err);
   }
 };
 
-const create = (req, res, next) => {
+const create = async (req, res, next) => {
   try {
-    res.status(201).json({ success: true, message: 'Create loan - placeholder' });
+    const loan = await loanService.create(req.body);
+    res.status(HTTP_STATUS.CREATED).json({ success: true, data: loan });
   } catch (err) {
     next(err);
   }
 };
 
-const update = (req, res, next) => {
+const update = async (req, res, next) => {
   try {
-    res.status(200).json({ success: true, message: `Update loan with id ${req.params.id} - placeholder` });
+    const loan = await loanService.update(req.params.id, req.body);
+    res.status(HTTP_STATUS.OK).json({ success: true, data: loan });
   } catch (err) {
     next(err);
   }
 };
 
-const remove = (req, res, next) => {
+const remove = async (req, res, next) => {
   try {
-    res.status(200).json({ success: true, message: `Delete loan with id ${req.params.id} - placeholder` });
+    const result = await loanService.remove(req.params.id);
+    res.status(HTTP_STATUS.OK).json({ success: true, ...result });
   } catch (err) {
     next(err);
   }
