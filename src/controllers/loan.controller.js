@@ -1,49 +1,31 @@
 const loanService = require('../services/loan.service');
 const HTTP_STATUS = require('../enums/http-status.enum');
+const asyncHandler = require('../middleware/async-handler.middleware');
 
-const getAll = async (req, res, next) => {
-  try {
-    const loans = await loanService.getAll();
-    res.status(HTTP_STATUS.OK).json({ success: true, data: loans });
-  } catch (err) {
-    next(err);
-  }
-};
+const getAllLoans = asyncHandler(async (req, res) => {
+  const { status, page, limit } = req.query;
+  const result = await loanService.getAllLoans({ status, page, limit });
+  res.status(HTTP_STATUS.OK).json({ success: true, ...result });
+});
 
-const getOne = async (req, res, next) => {
-  try {
-    const loan = await loanService.getOne(req.params.id);
-    res.status(HTTP_STATUS.OK).json({ success: true, data: loan });
-  } catch (err) {
-    next(err);
-  }
-};
+const getLoanById = asyncHandler(async (req, res) => {
+  const loan = await loanService.getLoanById(req.params.id);
+  res.status(HTTP_STATUS.OK).json({ success: true, data: loan });
+});
 
-const create = async (req, res, next) => {
-  try {
-    const loan = await loanService.create(req.body);
-    res.status(HTTP_STATUS.CREATED).json({ success: true, data: loan });
-  } catch (err) {
-    next(err);
-  }
-};
+const createLoan = asyncHandler(async (req, res) => {
+  const loan = await loanService.createLoan(req.body);
+  res.status(HTTP_STATUS.CREATED).json({ success: true, data: loan });
+});
 
-const update = async (req, res, next) => {
-  try {
-    const loan = await loanService.update(req.params.id, req.body);
-    res.status(HTTP_STATUS.OK).json({ success: true, data: loan });
-  } catch (err) {
-    next(err);
-  }
-};
+const updateLoan = asyncHandler(async (req, res) => {
+  const loan = await loanService.updateLoan(req.params.id, req.body);
+  res.status(HTTP_STATUS.OK).json({ success: true, data: loan });
+});
 
-const remove = async (req, res, next) => {
-  try {
-    const result = await loanService.remove(req.params.id);
-    res.status(HTTP_STATUS.OK).json({ success: true, ...result });
-  } catch (err) {
-    next(err);
-  }
-};
+const deleteLoan = asyncHandler(async (req, res) => {
+  const result = await loanService.deleteLoan(req.params.id);
+  res.status(HTTP_STATUS.OK).json({ success: true, ...result });
+});
 
-module.exports = { getAll, getOne, create, update, remove };
+module.exports = { getAllLoans, getLoanById, createLoan, updateLoan, deleteLoan };

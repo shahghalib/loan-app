@@ -4,4 +4,10 @@ const LOAN_STATUS = {
   REJECTED: 'REJECTED',
 };
 
-module.exports = LOAN_STATUS;
+// Used specifically for the GET filter query param (?status=...)
+const LOAN_STATUS_FILTER = {
+  ALL: 'all',
+  ...LOAN_STATUS,
+};
+
+module.exports = { LOAN_STATUS, LOAN_STATUS_FILTER };

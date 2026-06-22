@@ -1,11 +1,15 @@
 {
   "name": "loan-application-api",
-  "version": "2.0.0",
-  "description": "Loan Application Management REST API - Module 02",
+  "version": "3.0.0",
+  "description": "Loan Application Management REST API - Module 02 Review Fixes",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "seed": "npx sequelize-cli db:seed:all",
+    "seed:undo": "npx sequelize-cli db:seed:undo:all"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,6 +22,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "sequelize-cli": "^6.6.2"
   }
 }

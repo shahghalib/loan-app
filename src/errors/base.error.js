@@ -1,3 +1,5 @@
+const HTTP_STATUS = require('../enums/http-status.enum');
+
 class BaseError extends Error {
   constructor(message, statusCode) {
     super(message);
@@ -7,4 +9,16 @@ class BaseError extends Error {
   }
 }
 
-module.exports = BaseError;
+class NotFoundError extends BaseError {
+  constructor(message = 'Resource not found') {
+    super(message, HTTP_STATUS.NOT_FOUND);
+  }
+}
+
+class BadRequestError extends BaseError {
+  constructor(message = 'Bad request') {
+    super(message, HTTP_STATUS.BAD_REQUEST);
+  }
+}
+
+module.exports = { BaseError, NotFoundError, BadRequestError };
